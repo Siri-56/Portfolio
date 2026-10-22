@@ -1,0 +1,244 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   THE LITTLE MUSEUM OF IDEAS — DESIGN SYSTEM & TOKENS
+   Color Palette:
+   - Warm Cream:   #FFF5E9
+   - Deep Burgundy: #542C39
+   - Cherry Pink:   #E9A0A8
+   - Powder Blue:   #D5DDF6
+   - Butter Yellow: #E7C86B
+   ========================================================================== */
+
+:root {
+  /* Brand Museum Colors */
+  --color-cream: #FFF5E9;
+  --color-cream-light: #FFFAF3;
+  --color-cream-tint: rgba(255, 245, 233, 0.92);
+  --color-cream-dark: #F5E8D6;
+
+  --color-burgundy: #542C39;
+  --color-burgundy-deep: #3D1C27;
+  --color-burgundy-darkest: #2A101A;
+  --color-burgundy-soft: #6E3B4B;
+
+  --color-cherry: #E9A0A8;
+  --color-cherry-light: #F4BAC0;
+  --color-cherry-dark: #D47983;
+
+  --color-blue: #D5DDF6;
+  --color-blue-soft: #E8EEFB;
+  --color-blue-deep: #7D93D6;
+
+  --color-yellow: #E7C86B;
+  --color-yellow-gold: #D6B24D;
+  --color-yellow-light: #F4E2A8;
+
+  /* Typography */
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Shadows & Texture */
+  --shadow-plaque: 0 10px 30px -10px rgba(84, 44, 57, 0.25), 0 2px 6px rgba(84, 44, 57, 0.08);
+  --shadow-frame: 0 18px 45px -12px rgba(42, 16, 26, 0.45), 0 0 0 1px rgba(231, 200, 107, 0.35);
+  --shadow-frame-hover: 0 24px 60px -15px rgba(42, 16, 26, 0.65), 0 0 0 2px var(--color-yellow);
+
+  /* Transitions */
+  --ease-museum: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.35s var(--ease-museum);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-burgundy);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-cream);
+  color: var(--color-burgundy);
+}
+
+/* Accessible focus visible */
+:focus-visible {
+  outline: 2px solid var(--color-burgundy);
+  outline-offset: 3px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-cherry);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-burgundy);
+}
+
+/* Typography Classes */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Classical Museum Plaque */
+.museum-plaque {
+  background: var(--color-cream-light);
+  border: 1px solid rgba(84, 44, 57, 0.15);
+  box-shadow: var(--shadow-plaque);
+  border-radius: 12px;
+  position: relative;
+}
+
+.museum-plaque::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid rgba(84, 44, 57, 0.08);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.museum-plaque-dark {
+  background: var(--color-burgundy-deep);
+  color: var(--color-cream);
+  border: 1px solid rgba(231, 200, 107, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  border-radius: 12px;
+  position: relative;
+}
+
+.museum-plaque-dark::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1px solid rgba(231, 200, 107, 0.18);
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* Museum Gold Picture Frame */
+.gold-frame {
+  border: 8px solid #B8923A;
+  border-image: linear-gradient(135deg, #F4E2A8 0%, #D6B24D 35%, #8C6A24 70%, #E7C86B 100%) 8;
+  box-shadow: var(--shadow-frame);
+  transition: var(--transition-smooth);
+}
+
+.gold-frame-interactive {
+  border: 6px solid #D6B24D;
+  box-shadow: var(--shadow-frame);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.gold-frame-interactive:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: var(--shadow-frame-hover);
+  border-color: var(--color-yellow);
+}
+
+/* Subtle scroll indicator animation */
+@keyframes museumBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.scroll-invitation {
+  animation: museumBounce 2.5s ease-in-out infinite;
+}
+
+/* Sticky Navigation Bar */
+.museum-nav {
+  background: rgba(255, 245, 233, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(84, 44, 57, 0.12);
+  transition: var(--transition-smooth);
+}
+
+/* Speech Bubble for Avatar */
+.speech-bubble {
+  position: relative;
+  background: var(--color-cream-light);
+  border: 2px solid var(--color-burgundy);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px -5px rgba(84, 44, 57, 0.18);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid var(--color-burgundy);
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid var(--color-cream-light);
+  z-index: 1;
+}
+
+/* Responsive utilities */
+.container-narrow {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
