@@ -10,12 +10,12 @@ export default function MuseumNavbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      const sections = ['entrance', 'gallery', 'agrimart', 'zypha', 'about', 'contact'];
+      const sections = ['entrance', 'gallery-conversation', 'gallery', 'about', 'contact'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
+          if (rect.top <= 250 && rect.bottom >= 200) {
             setActiveSection(sectionId);
             break;
           }
