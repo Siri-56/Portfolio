@@ -2,20 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export default function MuseumNavbar() {
-  const [activeSection, setActiveSection] = useState('entrance');
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      const sections = ['entrance', 'gallery-conversation', 'gallery', 'about', 'contact'];
+      const sections = ['home', 'projects', 'gallery-wall', 'about', 'contact'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 250 && rect.bottom >= 200) {
+          if (rect.top <= 250 && rect.bottom >= 150) {
             setActiveSection(sectionId);
             break;
           }
@@ -28,14 +25,15 @@ export default function MuseumNavbar() {
   }, []);
 
   const navItems = [
-    { label: 'SIRISHA', href: '#entrance' },
-    { label: 'GALLERY', href: '#gallery' },
-    { label: 'ABOUT', href: '#about' },
-    { label: 'CONTACT', href: '#contact' },
+    { label: 'Home', href: '#home', key: 'home' },
+    { label: 'Projects', href: '#projects', key: 'projects' },
+    { label: 'About Me', href: '#about', key: 'about' },
+    { label: 'Contact', href: '#contact', key: 'contact' },
   ];
 
-  const handleNavClick = (e, href) => {
+  const handleNavClick = (e, href, key) => {
     e.preventDefault();
+    setActiveSection(key);
     setMobileOpen(false);
     const target = document.querySelector(href);
     if (target) {
@@ -45,152 +43,191 @@ export default function MuseumNavbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 ${isScrolled ? 'museum-nav py-3' : 'bg-transparent py-5'}`}
+      className="navbar"
       style={{
-        paddingLeft: 'max(24px, env(safe-area-inset-left))',
-        paddingRight: 'max(24px, env(safe-area-inset-right))',
-        transition: 'var(--transition-smooth)',
+        position: 'fixed',
+        top: '20px',
+        left: '4%',
+        width: '92%',
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '14px 28px',
+        background: 'rgba(255, 245, 233, 0.72)',
+        backdropFilter: 'blur(18px)',
+        WebkitBackdropFilter: 'blur(18px)',
+        border: '1px solid rgba(255, 255, 255, 0.65)',
+        borderRadius: '24px',
+        boxShadow: '0 8px 30px rgba(52, 25, 30, 0.12)',
+        boxSizing: 'border-box',
       }}
     >
-      <div
+      {/* Brand: SIRISHA / THE LITTLE MUSEUM */}
+      <a
+        href="#home"
+        onClick={(e) => handleNavClick(e, '#home', 'home')}
         style={{
-          maxWidth: '1160px',
-          margin: '0 auto',
+          textDecoration: 'none',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          cursor: 'pointer',
         }}
       >
-        {/* Logo / Brand */}
-        <a
-          href="#entrance"
-          onClick={(e) => handleNavClick(e, '#entrance')}
+        <span
           style={{
-            textDecoration: 'none',
-            color: 'var(--color-burgundy)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
+            fontSize: '1.05rem',
+            fontWeight: 800,
+            letterSpacing: '0.22em',
+            color: '#542c39',
+            lineHeight: 1.15,
+            textTransform: 'uppercase',
+            fontFamily: 'inherit',
           }}
         >
-          <span
-            className="font-serif"
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 800,
-              letterSpacing: '0.04em',
-              color: 'var(--color-burgundy)',
-            }}
-          >
-            SIRISHA
-          </span>
-          <span
-            style={{
-              fontSize: '0.72rem',
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              color: 'var(--color-burgundy-soft)',
-              padding: '2px 8px',
-              borderRadius: '999px',
-              background: 'rgba(84, 44, 57, 0.08)',
-              fontWeight: 600,
-            }}
-          >
-            The Little Museum
-          </span>
-        </a>
-
-        {/* Desktop Nav */}
-        <nav
+          SIRISHA
+        </span>
+        <span
           style={{
-            display: 'none',
-            alignItems: 'center',
-            gap: '32px',
+            fontSize: '0.62rem',
+            fontWeight: 600,
+            letterSpacing: '0.22em',
+            color: '#8e5866',
+            lineHeight: 1.2,
+            marginTop: '3px',
+            textTransform: 'uppercase',
+            fontFamily: 'inherit',
           }}
-          className="desktop-menu"
         >
-          {navItems.slice(1).map((item) => {
-            const isActive =
-              (item.href === '#gallery' && (activeSection === 'gallery' || activeSection === 'agrimart' || activeSection === 'zypha')) ||
-              (item.href === '#about' && activeSection === 'about') ||
-              (item.href === '#contact' && activeSection === 'contact');
+          THE LITTLE MUSEUM
+        </span>
+      </a>
 
-            return (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                style={{
-                  color: isActive ? 'var(--color-burgundy)' : 'rgba(84, 44, 57, 0.72)',
-                  fontWeight: isActive ? 800 : 600,
-                  fontSize: '0.86rem',
-                  letterSpacing: '0.08em',
-                  textDecoration: 'none',
-                  padding: '6px 12px',
-                  borderRadius: '6px',
-                  borderBottom: isActive ? '2px solid var(--color-burgundy)' : '2px solid transparent',
-                  transition: 'var(--transition-smooth)',
-                }}
-              >
-                {item.label}
-              </a>
-            );
-          })}
-        </nav>
+      {/* Desktop Nav: Home | Projects | About Me | Contact */}
+      <nav
+        className="desktop-menu"
+        style={{
+          display: 'none',
+          alignItems: 'center',
+          gap: '36px',
+        }}
+      >
+        {navItems.map((item) => {
+          const isActive =
+            (item.key === 'home' && activeSection === 'home') ||
+            (item.key === 'projects' && (activeSection === 'projects' || activeSection === 'gallery-wall')) ||
+            (item.key === 'about' && activeSection === 'about') ||
+            (item.key === 'contact' && activeSection === 'contact');
 
-        {/* Mobile Hamburger */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle Navigation"
-          style={{
-            display: 'none',
-            background: 'none',
-            border: 'none',
-            color: 'var(--color-burgundy)',
-            cursor: 'pointer',
-            padding: '6px',
-          }}
-          className="mobile-toggle"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+          return (
+            <a
+              key={item.label}
+              href={item.href}
+              onClick={(e) => handleNavClick(e, item.href, item.key)}
+              className={isActive ? 'active' : ''}
+              style={{
+                color: '#542c39',
+                textDecoration: 'none',
+                position: 'relative',
+                fontSize: '0.94rem',
+                fontWeight: isActive ? 700 : 500,
+                letterSpacing: '0.01em',
+                transition: 'color 0.2s ease',
+                padding: '4px 0',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive) e.currentTarget.style.color = '#381622';
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive) e.currentTarget.style.color = '#542c39';
+              }}
+            >
+              <span>{item.label}</span>
+              {isActive && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    bottom: '-8px',
+                    width: '100%',
+                    height: '2px',
+                    background: '#e9a0a8',
+                    borderRadius: '2px',
+                  }}
+                />
+              )}
+            </a>
+          );
+        })}
+      </nav>
+
+      {/* Mobile Hamburger Button */}
+      <button
+        onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label="Toggle Navigation Menu"
+        className="mobile-toggle"
+        style={{
+          display: 'none',
+          background: 'transparent',
+          border: 'none',
+          color: '#542c39',
+          cursor: 'pointer',
+          padding: '4px',
+        }}
+      >
+        {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
 
       {/* Mobile Drawer */}
       {mobileOpen && (
         <div
           style={{
             position: 'absolute',
-            top: '100%',
+            top: 'calc(100% + 10px)',
             left: 0,
             right: 0,
-            background: 'var(--color-cream-light)',
-            borderBottom: '1px solid rgba(84, 44, 57, 0.15)',
-            padding: '24px',
+            background: 'rgba(255, 245, 233, 0.96)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            border: '1px solid rgba(255, 255, 255, 0.8)',
+            borderRadius: '20px',
+            padding: '18px 24px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '16px',
-            boxShadow: 'var(--shadow-plaque)',
+            gap: '12px',
+            boxShadow: '0 12px 35px rgba(52, 25, 30, 0.15)',
           }}
         >
-          {navItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              style={{
-                color: 'var(--color-burgundy)',
-                fontSize: '1rem',
-                fontWeight: 700,
-                letterSpacing: '0.06em',
-                textDecoration: 'none',
-                padding: '8px 0',
-                borderBottom: '1px solid rgba(84, 44, 57, 0.08)',
-              }}
-            >
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive =
+              (item.key === 'home' && activeSection === 'home') ||
+              (item.key === 'projects' && (activeSection === 'projects' || activeSection === 'gallery-wall')) ||
+              (item.key === 'about' && activeSection === 'about') ||
+              (item.key === 'contact' && activeSection === 'contact');
+
+            return (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href, item.key)}
+                style={{
+                  color: '#542c39',
+                  fontSize: '1rem',
+                  fontWeight: isActive ? 700 : 500,
+                  textDecoration: 'none',
+                  padding: '6px 0',
+                  borderBottom: isActive ? '2px solid #e9a0a8' : 'none',
+                  width: 'fit-content',
+                }}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </div>
       )}
 

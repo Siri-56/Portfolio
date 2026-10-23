@@ -1,33 +1,34 @@
 import React from 'react';
 import MuseumNavbar from './components/MuseumNavbar';
-import MuseumEntranceSection from './components/MuseumEntranceSection';
-import GalleryConversationSection from './components/GalleryConversationSection';
-import FeaturedPortraitSection from './components/FeaturedPortraitSection';
+import SceneConversation from './components/SceneConversation';
+import SceneCourtyard from './components/SceneCourtyard';
+import SceneFramedWall from './components/SceneFramedWall';
 import CuratorSection from './components/CuratorSection';
 import GuestbookSection from './components/GuestbookSection';
 
 export default function App() {
   return (
     <div className="museum-app-root relative min-h-screen">
-      {/* Sticky Minimal Navigation: SIRISHA | GALLERY | ABOUT | CONTACT */}
+      {/* Navigation: HOME | PROJECTS | ABOUT ME | CONTACT */}
       <MuseumNavbar />
 
       <main>
-        {/* Section 1: Museum Entrance (Warm Courtyard Portrait with Arched Doors) */}
-        <MuseumEntranceSection />
+        {/* 1st Scene (HOME): Courtyard Portrait of Sirisha ("Hey there! I’m Sirisha.") */}
+        <SceneCourtyard />
 
-        {/* Section 2: Gallery Scene (Warm Conversation in the Art Gallery) */}
-        <GalleryConversationSection />
+        {/* 2nd Scene (PROJECTS): Warm Conversation in the Art Gallery with Clickable Project Portraits */}
+        <SceneConversation />
 
-        {/* Section 3: The Two Featured Project Portraits (Quiet gallery wall with interactive framed portrait) */}
-        <FeaturedPortraitSection />
+        {/* 3rd Scene: Quiet Gallery Wall */}
+        <SceneFramedWall />
 
         {/* Section 4: About Me — The Curator ("The Person Behind the Pixels") */}
         <CuratorSection />
 
-        {/* Section 5: Contact — The Museum Guestbook & Exit ("Before you leave…") */}
+        {/* Section 5: Contact — Museum Exit & Guestbook ("Before you leave…") */}
         <GuestbookSection />
       </main>
     </div>
   );
 }
+

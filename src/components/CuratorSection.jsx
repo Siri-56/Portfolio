@@ -1,5 +1,5 @@
 import React from 'react';
-import { Eye, Layers, Sparkles, Compass, CheckCircle2 } from 'lucide-react';
+import { Eye, Layers, Sparkles } from 'lucide-react';
 
 export default function CuratorSection() {
   const stages = [
@@ -46,26 +46,6 @@ export default function CuratorSection() {
       <div className="container-narrow" style={{ display: 'flex', flexDirection: 'column', gap: '60px' }}>
         {/* Curatorial Header */}
         <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '6px 16px',
-              borderRadius: '9999px',
-              background: 'rgba(84, 44, 57, 0.08)',
-              color: 'var(--color-burgundy)',
-              fontSize: '0.76rem',
-              fontWeight: 800,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              marginBottom: '14px',
-            }}
-          >
-            <Compass size={14} />
-            <span>Room 03 • Curatorial Wing</span>
-          </div>
-
           <h2
             className="font-serif"
             style={{
@@ -161,7 +141,7 @@ export default function CuratorSection() {
             </h3>
 
             <p style={{ fontSize: '0.98rem', color: 'rgba(84, 44, 57, 0.85)', lineHeight: 1.7 }}>
-              Hello! I'm <strong>Sirisha</strong>, a UI/UX designer dedicated to building purposeful digital products that
+              I'm dedicated to building purposeful digital products that
               balance usability, emotional resonance, and solid technical foundations.
             </p>
 

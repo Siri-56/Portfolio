@@ -181,12 +181,26 @@ body {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(8px);
+    transform: translateY(6px);
   }
 }
 
 .scroll-invitation {
+  background: rgba(255, 245, 233, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 9999px;
+  box-shadow: 0 8px 30px rgba(52, 25, 30, 0.16);
+  color: #542c39;
   animation: museumBounce 2.5s ease-in-out infinite;
+  transition: all 0.25s ease;
+}
+
+.scroll-invitation:hover {
+  background: rgba(255, 245, 233, 0.95);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 35px rgba(52, 25, 30, 0.26);
 }
 
 /* Sticky Navigation Bar */
