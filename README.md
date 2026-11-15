@@ -1,16 +1,32 @@
-# React + Vite
+# The Little Museum of Ideas — Sirisha's Design Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An immersive, museum-themed portfolio showcasing UI/UX case studies, interactive product design systems, and creative problem solving.
 
-Currently, two official plugins are available:
+## 🏛️ Exhibition Walkthrough
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Scene 1 (Home)**: Courtyard Entrance with Sirisha — warm welcoming introduction with interactive depth zoom.
+- **Scene 2 (Projects)**: The Art Gallery — classical crimson wall exhibition featuring interactive, tilt-responsive project paintings:
+  - **Zypha**: AI-Powered Medicine Delivery Platform (UX research, medication adherence systems, and mobile companion).
+  - **AgriMart**: Fresh Produce from Local Farmers (farm-to-table marketplace with provenance transparency).
+  - **Fine Art Collection**: Classical vistas, sunsets, and curatorial artifacts.
+- **Scene 3 (About)**: The Quiet Gallery Wall — personal statement, philosophy, and approach to human-centered design.
+- **Scene 4 (Contact)**: Museum Exit & Guestbook — interactive contact details and direct email communication.
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Framework**: React 19 + Vite 8
+- **Icons**: Lucide React
+- **Styling**: Modern responsive CSS with custom properties, glassmorphism backdrop filters, and fluid clamp typography.
 
-## Expanding the Oxlint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+# Install dependencies
+npm install
+
+# Run local development server
+npm run dev
+
+# Build for production
+npm run build
+```

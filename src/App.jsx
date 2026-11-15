@@ -1,10 +1,9 @@
 import React from 'react';
-import MuseumNavbar from './components/MuseumNavbar';
-import SceneConversation from './components/SceneConversation';
-import SceneCourtyard from './components/SceneCourtyard';
-import SceneFramedWall from './components/SceneFramedWall';
-import CuratorSection from './components/CuratorSection';
-import GuestbookSection from './components/GuestbookSection';
+import MuseumNavbar from './components/navigation/MuseumNavbar';
+import SceneCourtyard from './components/scenes/SceneCourtyard';
+import SceneGalleryWall from './components/scenes/SceneGalleryWall';
+import SceneQuietWall from './components/scenes/SceneQuietWall';
+import SceneGuestbook from './components/scenes/SceneGuestbook';
 
 export default function App() {
   return (
@@ -13,22 +12,18 @@ export default function App() {
       <MuseumNavbar />
 
       <main>
-        {/* 1st Scene (HOME): Courtyard Portrait of Sirisha ("Hey there! I’m Sirisha.") */}
+        {/* Scene 1 (HOME): Entrance Courtyard with Sirisha */}
         <SceneCourtyard />
 
-        {/* 2nd Scene (PROJECTS): Warm Conversation in the Art Gallery with Clickable Project Portraits */}
-        <SceneConversation />
+        {/* Scene 2 (PROJECTS): Gallery Wall with Framed Project Case Studies */}
+        <SceneGalleryWall />
 
-        {/* 3rd Scene: Quiet Gallery Wall */}
-        <SceneFramedWall />
+        {/* Scene 3 (ABOUT): Quiet Gallery Wall with Inscription */}
+        <SceneQuietWall />
 
-        {/* Section 4: About Me — The Curator ("The Person Behind the Pixels") */}
-        <CuratorSection />
-
-        {/* Section 5: Contact — Museum Exit & Guestbook ("Before you leave…") */}
-        <GuestbookSection />
+        {/* Scene 4 (CONTACT): Guestbook & Museum Exit */}
+        <SceneGuestbook />
       </main>
     </div>
   );
 }
-

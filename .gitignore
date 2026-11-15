@@ -44,6 +44,7 @@ dist-ssr
 *.swo
 
 # Operating System files (macOS & Windows)
+*.code-workspace
 .DS_Store
 .DS_Store?
 ._*
