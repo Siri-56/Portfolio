@@ -98,6 +98,20 @@ const GALLERY_PROJECTS = [
     curatorNote:
       'A harmonious intersection of timeless art, analog photography, and architectural storytelling. Capturing the artifacts that inspire human-centered design.',
   },
+  {
+    id: 'tuscan_colonnade',
+    type: 'art',
+    title: 'The Tuscan Colonnade',
+    subtitle: 'Corinthian arches, blueprints & cypress twilight',
+    category: 'Masterwork Exhibition',
+    image: '/frames/frame_tuscan_colonnade.png',
+    aspect: 'square',
+    year: '2026',
+    medium: 'Oil & Tempera on Linen Canvas',
+    dimensions: '75 × 75 cm',
+    curatorNote:
+      'An architectural terrace overlooking Tuscan hills at golden hour. Archival drafting tools, rolled blueprints, and blooming jasmine celebrating the foundations of classical proportion.',
+  },
 ];
 
 /**

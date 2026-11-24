@@ -14,6 +14,7 @@ const PRELOAD_ASSETS = [
   '/frames/frame_classical_vista.png',
   '/frames/frame_sunset.png',
   '/frames/frame_curator_studio.png',
+  '/frames/frame_tuscan_colonnade.png',
 
   // Case Study Device Showcases
   '/case-studies/agrimart/hero_devices.png',
