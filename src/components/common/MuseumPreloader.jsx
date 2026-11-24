@@ -172,7 +172,7 @@ export default function MuseumPreloader({ onLoaded }) {
         <div className="museum-preloader-titles">
           <span className="museum-preloader-eyebrow">EXHIBITION PREVIEW</span>
           <h1 className="museum-preloader-name">The Little Museum of Ideas</h1>
-          <p className="museum-preloader-curator">Curated Portfolio of Sirisha Kolluru</p>
+          <p className="museum-preloader-curator">UI/UX Portfolio of Sirisha Kolluru</p>
         </div>
 
         {/* Progress Bar Container */}
