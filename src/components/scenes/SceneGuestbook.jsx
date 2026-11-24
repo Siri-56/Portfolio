@@ -371,7 +371,7 @@ export default function SceneGuestbook() {
               marginTop: '4px',
             }}
           >
-            The Little Museum of Ideas • Curated & Designed by Sirisha
+            The Little Museum of Ideas • Designed by Sirisha
           </div>
         </div>
       </div>
