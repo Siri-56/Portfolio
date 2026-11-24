@@ -117,8 +117,8 @@ function ScrollableGalleryFrame({
   // Only AgriMart and Zypha are interactive case studies; the rest three are quiet fine art frames
   const isInteractive = project.type === 'project';
   const isLong = project.aspect === 'long';
-  const widthStyle = isLong ? 'clamp(140px, 23.5vh, 172px)' : 'clamp(162px, 27vh, 198px)';
-  const heightStyle = isLong ? 'clamp(185px, 31vh, 228px)' : 'clamp(158px, 26.5vh, 192px)';
+  const widthStyle = isLong ? 'clamp(112px, 16.5vh, 138px)' : 'clamp(128px, 18.5vh, 156px)';
+  const heightStyle = isLong ? 'clamp(146px, 21.5vh, 180px)' : 'clamp(128px, 18.5vh, 156px)';
 
   // Stagger idle floating animation duration and delay
   const idleDurations = ['5.4s', '6.2s', '5.8s', '6.6s', '5.6s'];
@@ -165,7 +165,7 @@ function ScrollableGalleryFrame({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '0 30px',
+        margin: '0 clamp(16px, 2vw, 24px)',
         cursor: isInteractive ? 'pointer' : 'default',
         userSelect: 'none',
         perspective: '1000px',
@@ -325,7 +325,8 @@ export default function SceneGalleryWall() {
         renderedW = W;
         renderedH = W / imgAspect;
         left = 0;
-        top = (H - renderedH) / 2;
+        // Bias top upward (12%) to preserve full crimson wall headroom below navbar
+        top = Math.max(H - renderedH, (H - renderedH) * 0.12);
       } else {
         renderedH = H;
         renderedW = H * imgAspect;
@@ -453,7 +454,7 @@ export default function SceneGalleryWall() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center center',
+          objectPosition: 'center 12%',
           zIndex: 1,
           pointerEvents: 'none',
           imageRendering: '-webkit-optimize-contrast',
@@ -462,7 +463,7 @@ export default function SceneGalleryWall() {
 
       {/* =======================================================================
           ASPECT-RATIO LOCKED WALL OVERLAY
-          Lowered to natural eye level on crimson wall (top: 11.5%)
+          Positioned comfortably above character eye-level on crimson wall
           Extends across the full wall from left corner to right archway
           ======================================================================= */}
       <div
@@ -476,14 +477,14 @@ export default function SceneGalleryWall() {
           pointerEvents: 'none',
         }}
       >
-        {/* Wall Scrollable Track (y: 11.5% to 47% of image height) */}
+        {/* Wall Scrollable Track (y: 7.8% to 36.6% - completely clear of man's head) */}
         <div
           style={{
             position: 'absolute',
-            top: '11.5%',
+            top: '7.8%',
             left: '2.85%', // Exact corner seam of the hanging crimson wall (does not spill onto side wall)
             right: '6.8%', // Extends right to the Roman archway pillar
-            height: '35.5%',
+            height: '28.8%',
             pointerEvents: 'auto',
             overflow: 'hidden',
           }}
@@ -515,9 +516,9 @@ export default function SceneGalleryWall() {
             <div
               style={{
                 flexShrink: 0,
-                width: '270px',
-                marginRight: '40px',
-                padding: '12px 22px',
+                width: 'clamp(210px, 22vw, 255px)',
+                marginRight: 'clamp(20px, 2.8vw, 36px)',
+                padding: '8px 18px',
                 borderLeft: '2.5px solid #D8AE58',
                 userSelect: 'none',
               }}
@@ -526,11 +527,11 @@ export default function SceneGalleryWall() {
                 style={{
                   display: 'inline-block',
                   color: '#FFE194',
-                  fontSize: '0.72rem',
+                  fontSize: '0.68rem',
                   fontWeight: 800,
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  marginBottom: '8px',
+                  marginBottom: '6px',
                 }}
               >
                 <span>The Gallery</span>
@@ -539,11 +540,11 @@ export default function SceneGalleryWall() {
                 className="font-serif"
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontSize: 'clamp(1.5rem, 2.2vw, 1.85rem)',
+                  fontSize: 'clamp(1.3rem, 1.8vw, 1.6rem)',
                   fontWeight: 800,
                   color: '#FFF5E9',
-                  lineHeight: 1.18,
-                  margin: '0 0 10px 0',
+                  lineHeight: 1.15,
+                  margin: '0 0 6px 0',
                   textShadow: '0 2px 10px rgba(0, 0, 0, 0.65)',
                   letterSpacing: '-0.01em',
                 }}
@@ -553,9 +554,9 @@ export default function SceneGalleryWall() {
               <p
                 style={{
                   fontFamily: 'var(--font-sans)',
-                  fontSize: '0.86rem',
+                  fontSize: 'clamp(0.74rem, 1vw, 0.82rem)',
                   color: 'rgba(255, 245, 233, 0.92)',
-                  lineHeight: 1.55,
+                  lineHeight: 1.45,
                   margin: 0,
                   textShadow: '0 1px 4px rgba(0, 0, 0, 0.6)',
                   fontWeight: 400,
