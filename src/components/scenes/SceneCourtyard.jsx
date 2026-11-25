@@ -151,7 +151,7 @@ export default function SceneCourtyard() {
         </div>
 
         <div className="bubble-subtitle">
-          Designing intuitive digital experiences through user-centred thinking, thoughtful interactions and visual storytelling.
+          UI/UX Designer
         </div>
       </div>
 
@@ -362,20 +362,36 @@ export default function SceneCourtyard() {
         /* Mobile layout */
         @media (max-width: 680px) {
           .courtyard-avatar-container {
-            width: 90vw;
-            max-height: 65%;
+            width: 88vw;
+            max-height: 68%;
           }
 
           .courtyard-avatar-image {
-            max-height: 65vh;
+            max-height: 68vh;
           }
 
           .curator-speech-bubble {
-            top: 105px;
+            top: clamp(82px, 12vh, 105px);
             left: 50%;
             transform: translateX(-50%);
-            width: max-content;
-            max-width: 90%;
+            width: 88%;
+            max-width: 320px;
+            padding: 14px 18px;
+            border-radius: 20px;
+            text-align: center;
+          }
+
+          .bubble-tail {
+            display: none;
+          }
+
+          .bubble-heading {
+            font-size: 1.25rem;
+          }
+
+          .bubble-subtitle {
+            font-size: 0.84rem;
+            margin-top: 3px;
           }
         }
 

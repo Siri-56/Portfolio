@@ -98,7 +98,7 @@ export default function MuseumNavbar() {
             fontFamily: 'inherit',
           }}
         >
-          THE LITTLE MUSEUM
+          UI/UX DESIGNER
         </span>
       </a>
 
@@ -239,6 +239,13 @@ export default function MuseumNavbar() {
           }
         }
         @media (max-width: 767px) {
+          .navbar {
+            top: 12px !important;
+            left: 3% !important;
+            width: 94% !important;
+            padding: 10px 16px !important;
+            border-radius: 18px !important;
+          }
           .mobile-toggle {
             display: block !important;
           }

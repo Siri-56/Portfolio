@@ -123,6 +123,7 @@ function ScrollableGalleryFrame({
   project,
   index,
   onSelect,
+  isMobile,
 }) {
   const cardRef = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0, glareX: 50, glareY: 50 });
@@ -131,8 +132,20 @@ function ScrollableGalleryFrame({
   // Only AgriMart and Zypha are interactive case studies; the rest three are quiet fine art frames
   const isInteractive = project.type === 'project';
   const isLong = project.aspect === 'long';
-  const widthStyle = isLong ? 'clamp(112px, 16.5vh, 138px)' : 'clamp(128px, 18.5vh, 156px)';
-  const heightStyle = isLong ? 'clamp(146px, 21.5vh, 180px)' : 'clamp(128px, 18.5vh, 156px)';
+  const widthStyle = isMobile
+    ? isLong
+      ? 'clamp(126px, 36vw, 150px)'
+      : 'clamp(142px, 40vw, 168px)'
+    : isLong
+      ? 'clamp(112px, 16.5vh, 138px)'
+      : 'clamp(128px, 18.5vh, 156px)';
+  const heightStyle = isMobile
+    ? isLong
+      ? 'clamp(164px, 48vw, 196px)'
+      : 'clamp(142px, 40vw, 168px)'
+    : isLong
+      ? 'clamp(146px, 21.5vh, 180px)'
+      : 'clamp(128px, 18.5vh, 156px)';
 
   // Stagger idle floating animation duration and delay
   const idleDurations = ['5.4s', '6.2s', '5.8s', '6.6s', '5.6s'];
@@ -179,7 +192,7 @@ function ScrollableGalleryFrame({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '0 clamp(16px, 2vw, 24px)',
+        margin: isMobile ? '0 12px' : '0 clamp(16px, 2vw, 24px)',
         cursor: isInteractive ? 'pointer' : 'default',
         userSelect: 'none',
         perspective: '1000px',
@@ -293,6 +306,7 @@ export default function SceneGalleryWall() {
   const containerRef = useRef(null);
   const [activeProject, setActiveProject] = useState(null);
   const [isSteppingToWall, setIsSteppingToWall] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Lock background scrolling whenever any project modal is open
   useEffect(() => {
@@ -330,6 +344,9 @@ export default function SceneGalleryWall() {
       if (!containerRef.current) return;
       const { clientWidth: W, clientHeight: H } = containerRef.current;
       if (!W || !H) return;
+
+      const mobile = W < 768 || W / H < 1.05;
+      setIsMobile(mobile);
 
       const imgAspect = 1024 / 576;
       const containerAspect = W / H;
@@ -468,7 +485,7 @@ export default function SceneGalleryWall() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center 12%',
+          objectPosition: isMobile ? 'center 35%' : 'center 12%',
           zIndex: 1,
           pointerEvents: 'none',
           imageRendering: '-webkit-optimize-contrast',
@@ -476,29 +493,27 @@ export default function SceneGalleryWall() {
       />
 
       {/* =======================================================================
-          ASPECT-RATIO LOCKED WALL OVERLAY
-          Positioned comfortably above character eye-level on crimson wall
-          Extends across the full wall from left corner to right archway
+          ASPECT-RATIO LOCKED WALL OVERLAY / MOBILE TOUCH-SCROLL WALL
           ======================================================================= */}
       <div
         style={{
           position: 'absolute',
-          left: aspectBounds.left,
-          top: aspectBounds.top,
-          width: aspectBounds.width,
-          height: aspectBounds.height,
+          left: isMobile ? 0 : aspectBounds.left,
+          top: isMobile ? 0 : aspectBounds.top,
+          width: isMobile ? '100%' : aspectBounds.width,
+          height: isMobile ? '100%' : aspectBounds.height,
           zIndex: 10,
           pointerEvents: 'none',
         }}
       >
-        {/* Wall Scrollable Track (y: 7.8% to 36.6% - completely clear of man's head) */}
+        {/* Wall Scrollable Track (y: 7.8% to 36.6% on desktop; phone-adaptive on mobile) */}
         <div
           style={{
             position: 'absolute',
-            top: '7.8%',
-            left: '2.85%', // Exact corner seam of the hanging crimson wall (does not spill onto side wall)
-            right: '6.8%', // Extends right to the Roman archway pillar
-            height: '28.8%',
+            top: isMobile ? 'clamp(78px, 11vh, 98px)' : '7.8%',
+            left: isMobile ? 0 : '2.85%',
+            right: isMobile ? 0 : '6.8%',
+            height: isMobile ? 'clamp(280px, 44vh, 340px)' : '28.8%',
             pointerEvents: 'auto',
             overflow: 'hidden',
           }}
@@ -519,9 +534,10 @@ export default function SceneGalleryWall() {
               overflowY: 'hidden',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
+              WebkitOverflowScrolling: 'touch',
               cursor: 'grab',
-              paddingLeft: 'clamp(28px, 3.5vw, 48px)',
-              paddingRight: 'clamp(36px, 4.5vw, 60px)',
+              paddingLeft: isMobile ? '16px' : 'clamp(28px, 3.5vw, 48px)',
+              paddingRight: isMobile ? '24px' : 'clamp(36px, 4.5vw, 60px)',
               scrollBehavior: 'smooth',
             }}
             className="wall-scroll-track"
@@ -530,8 +546,8 @@ export default function SceneGalleryWall() {
             <div
               style={{
                 flexShrink: 0,
-                width: 'clamp(210px, 22vw, 255px)',
-                marginRight: 'clamp(20px, 2.8vw, 36px)',
+                width: isMobile ? '210px' : 'clamp(210px, 22vw, 255px)',
+                marginRight: isMobile ? '18px' : 'clamp(20px, 2.8vw, 36px)',
                 padding: '8px 18px',
                 borderLeft: '2.5px solid #D8AE58',
                 userSelect: 'none',
@@ -587,6 +603,7 @@ export default function SceneGalleryWall() {
                 project={item}
                 index={idx}
                 onSelect={handleSelectProject}
+                isMobile={isMobile}
               />
             ))}
           </div>
@@ -598,11 +615,11 @@ export default function SceneGalleryWall() {
               aria-label="Scroll projects left"
               style={{
                 position: 'absolute',
-                left: '10px',
+                left: isMobile ? '4px' : '10px',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '42px',
-                height: '42px',
+                width: isMobile ? '36px' : '42px',
+                height: isMobile ? '36px' : '42px',
                 borderRadius: '50%',
                 background: 'rgba(255, 245, 233, 0.92)',
                 backdropFilter: 'blur(10px)',
@@ -620,7 +637,7 @@ export default function SceneGalleryWall() {
               onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)')}
               onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(-50%) scale(1)')}
             >
-              <ChevronLeft size={22} />
+              <ChevronLeft size={isMobile ? 18 : 22} />
             </button>
           )}
 
@@ -631,11 +648,11 @@ export default function SceneGalleryWall() {
               aria-label="Scroll projects right"
               style={{
                 position: 'absolute',
-                right: '10px',
+                right: isMobile ? '4px' : '10px',
                 top: '50%',
                 transform: 'translateY(-50%)',
-                width: '42px',
-                height: '42px',
+                width: isMobile ? '36px' : '42px',
+                height: isMobile ? '36px' : '42px',
                 borderRadius: '50%',
                 background: 'rgba(255, 245, 233, 0.92)',
                 backdropFilter: 'blur(10px)',
@@ -653,7 +670,7 @@ export default function SceneGalleryWall() {
               onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-50%) scale(1.1)')}
               onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(-50%) scale(1)')}
             >
-              <ChevronRight size={22} />
+              <ChevronRight size={isMobile ? 18 : 22} />
             </button>
           )}
         </div>

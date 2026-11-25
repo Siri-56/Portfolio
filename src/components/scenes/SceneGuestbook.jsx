@@ -378,6 +378,13 @@ export default function SceneGuestbook() {
 
       <style>{`
         @media (max-width: 900px) {
+          #contact {
+            padding-top: max(88px, 12vh) !important;
+            padding-bottom: 40px !important;
+            height: auto !important;
+            min-height: 100vh !important;
+            overflow-y: auto !important;
+          }
           .contact-layout-grid {
             grid-template-columns: 1fr !important;
           }

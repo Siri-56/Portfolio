@@ -6,6 +6,7 @@ export default function SceneQuietWall() {
   const containerRef = useRef(null);
   const [isSteppingToContact, setIsSteppingToContact] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [overlayStyle, setOverlayStyle] = useState({
     position: 'absolute',
     left: '0px',
@@ -36,6 +37,9 @@ export default function SceneQuietWall() {
       if (!containerRef.current) return;
       const { clientWidth: W, clientHeight: H } = containerRef.current;
       if (!W || !H) return;
+
+      const mobile = W < 768 || W / H < 1.05;
+      setIsMobile(mobile);
 
       // Natural image dimensions of museum_gallery_framed_wall.jpg: 1024 x 576 (16:9)
       const imgAspect = 1024 / 576;
@@ -116,10 +120,10 @@ export default function SceneQuietWall() {
         }}
       />
 
-      {/* Responsive Aspect-Ratio Layer Locked Exactly to the Green Wall Section */}
+      {/* Responsive Aspect-Ratio Layer */}
       <div
         style={{
-          ...overlayStyle,
+          ...(isMobile ? { position: 'absolute', inset: 0, width: '100%', height: '100%' } : overlayStyle),
           zIndex: 10,
           pointerEvents: 'none',
         }}
@@ -129,13 +133,23 @@ export default function SceneQuietWall() {
           className="framed-wall-inscription"
           style={{
             position: 'absolute',
-            left: '23.0%',
-            top: '25.5%',
-            width: '39.0%',
-            maxWidth: '560px',
+            left: isMobile ? '5%' : '23.0%',
+            right: isMobile ? '5%' : 'auto',
+            top: isMobile ? 'clamp(84px, 13vh, 115px)' : '25.5%',
+            width: isMobile ? '90%' : '39.0%',
+            maxWidth: isMobile ? '440px' : '560px',
+            margin: isMobile ? '0 auto' : '0',
             display: 'flex',
             flexDirection: 'column',
-            gap: '14px',
+            gap: isMobile ? '10px' : '14px',
+            padding: isMobile ? '20px 22px' : '0',
+            background: isMobile ? 'rgba(32, 42, 32, 0.78)' : 'transparent',
+            backdropFilter: isMobile ? 'blur(16px)' : 'none',
+            WebkitBackdropFilter: isMobile ? 'blur(16px)' : 'none',
+            borderRadius: isMobile ? '20px' : '0',
+            border: isMobile ? '1px solid rgba(255, 255, 255, 0.25)' : 'none',
+            boxShadow: isMobile ? '0 12px 35px rgba(0, 0, 0, 0.45)' : 'none',
+            boxSizing: 'border-box',
             pointerEvents: 'auto',
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(16px)',
@@ -145,7 +159,7 @@ export default function SceneQuietWall() {
           <h2
             className="font-serif"
             style={{
-              fontSize: 'clamp(1.75rem, 2.8vw, 2.7rem)',
+              fontSize: isMobile ? 'clamp(1.5rem, 5.5vw, 1.85rem)' : 'clamp(1.75rem, 2.8vw, 2.7rem)',
               fontWeight: 800,
               color: '#FFF5E9',
               letterSpacing: '0.01em',
@@ -159,10 +173,10 @@ export default function SceneQuietWall() {
 
           <p
             style={{
-              fontSize: 'clamp(0.92rem, 1.28vw, 1.15rem)',
+              fontSize: isMobile ? '0.88rem' : 'clamp(0.92rem, 1.28vw, 1.15rem)',
               color: 'rgba(255, 245, 233, 0.95)',
               fontWeight: 500,
-              lineHeight: 1.68,
+              lineHeight: isMobile ? 1.55 : 1.68,
               letterSpacing: '0.01em',
               margin: 0,
               textShadow: '0 2px 12px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.8)',
