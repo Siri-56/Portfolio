@@ -151,7 +151,7 @@ export default function SceneCourtyard() {
         </div>
 
         <div className="bubble-subtitle">
-          UI/UX Designer
+          I love turning problems into possibilities. Whether it's building something new or making technology more accessible, I find purpose in creating solutions that make a real difference.
         </div>
       </div>
 
@@ -248,12 +248,12 @@ export default function SceneCourtyard() {
         }
 
         .bubble-subtitle {
-          font-size: clamp(0.78rem, 0.95vw, 0.88rem);
+          font-size: clamp(0.74rem, 0.88vw, 0.84rem);
           color: #8e5866;
-          font-weight: 600;
-          margin-top: 6px;
-          letter-spacing: 0.01em;
-          line-height: 1.45;
+          font-weight: 450;
+          margin-top: 8px;
+          letter-spacing: 0.005em;
+          line-height: 1.6;
         }
 
         /* Scroll button */
@@ -390,8 +390,9 @@ export default function SceneCourtyard() {
           }
 
           .bubble-subtitle {
-            font-size: 0.84rem;
-            margin-top: 3px;
+            font-size: 0.78rem;
+            margin-top: 5px;
+            line-height: 1.55;
           }
         }
 
