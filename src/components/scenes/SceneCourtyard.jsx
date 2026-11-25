@@ -151,7 +151,7 @@ export default function SceneCourtyard() {
         </div>
 
         <div className="bubble-subtitle">
-          UI/UX Designer &amp; Creative Problem Solver
+          Designing intuitive digital experiences through user-centred thinking, thoughtful interactions and visual storytelling.
         </div>
       </div>
 
@@ -216,7 +216,7 @@ export default function SceneCourtyard() {
           position: absolute;
           top: clamp(130px, 22vh, 200px);
           left: clamp(52%, calc(50% + 60px), 62%);
-          max-width: clamp(280px, 26vw, 380px);
+          max-width: clamp(290px, 28vw, 420px);
           padding: 18px 24px;
           background: rgba(255, 245, 233, 0.78);
           backdrop-filter: blur(18px);
@@ -248,12 +248,12 @@ export default function SceneCourtyard() {
         }
 
         .bubble-subtitle {
-          font-size: clamp(0.8rem, 1vw, 0.92rem);
+          font-size: clamp(0.78rem, 0.95vw, 0.88rem);
           color: #8e5866;
           font-weight: 600;
-          margin-top: 5px;
+          margin-top: 6px;
           letter-spacing: 0.01em;
-          line-height: 1.35;
+          line-height: 1.45;
         }
 
         /* Scroll button */
