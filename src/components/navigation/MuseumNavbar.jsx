@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import { smoothScrollTo } from '../../utils/smoothScroll';
 
 export default function MuseumNavbar() {
   const [activeSection, setActiveSection] = useState('home');
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isClickScrollingRef = useRef(false);
+  const clickTimeoutRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
+      // Ignore scroll events during programmatic click-to-scroll to eliminate flickering
+      if (isClickScrollingRef.current) return;
+
       const sections = ['home', 'projects', 'about', 'contact'];
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
+      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
         if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 250 && rect.bottom >= 150) {
-            setActiveSection(sectionId);
+          const top = el.offsetTop;
+          if (scrollPosition >= top - 20) {
+            setActiveSection(sections[i]);
             break;
           }
         }
@@ -22,7 +29,10 @@ export default function MuseumNavbar() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+    };
   }, []);
 
   const navItems = [
@@ -36,7 +46,21 @@ export default function MuseumNavbar() {
     e.preventDefault();
     setActiveSection(key);
     setMobileOpen(false);
-    smoothScrollTo(href, 950);
+
+    // Lock scroll listener while the smooth scroll animation completes
+    isClickScrollingRef.current = true;
+    if (clickTimeoutRef.current) clearTimeout(clickTimeoutRef.current);
+
+    smoothScrollTo(href, 850, () => {
+      clickTimeoutRef.current = setTimeout(() => {
+        isClickScrollingRef.current = false;
+      }, 50);
+    });
+
+    // Safety fallback timeout to ensure listener is never permanently locked
+    clickTimeoutRef.current = setTimeout(() => {
+      isClickScrollingRef.current = false;
+    }, 1100);
   };
 
   return (
